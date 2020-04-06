@@ -1,0 +1,12 @@
+---
+- name: validator3
+  hosts: ['validator3']
+  become: True
+
+  vars:
+    rpki:
+      rtr_server_package_url: https://ftp.ripe.net/tools/rpki/validator3/rc/deb/rpki-rtr-server-latest.deb
+      validator_3_package_url: https://ftp.ripe.net/tools/rpki/validator3/rc/deb/rpki-validator-3-latest.deb
+
+  roles:
+    - role: validator3

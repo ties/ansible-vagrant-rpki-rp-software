@@ -1,0 +1,8 @@
+ca.name = APNIC AS0 Root
+certificate.location = rsync://registry-testbed.apnic.net/as0-test/ta/ta.cer
+public.key.info = MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvo8wLXUFnUjXyX
+hy11VpFWiDZy7Hs9TAIfymiKwCbOz3ZMp8iWgWoxI5IJzO0cIz/KaRgBbzVeXRFttp3nzh5Up+EQ
+XnL3ixWh3gAjSD0mTOLchLtS4pSuuHxLfdqTreCRLVK2Fbq09jUUPf76C6TazIQouMp6epGOJZvS
+fmBMK3TQphlXC/iREbiMtDL7gPhexidllhuNbk4PXXBhXxoUjOEG4YdVUC/MV3dXZ72IOtl1HQ9J
+3tky/bgaDVykD4j4wqHyrzhiXQ45KIrY7JGT95Z++L00OrjxlLwZoKi5vxh9U4rDtNUhPKESzpqu
+t1+cO4WX+Z6L2DR80abh1DOQIDAQAB
