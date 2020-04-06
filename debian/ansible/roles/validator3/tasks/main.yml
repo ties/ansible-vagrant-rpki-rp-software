@@ -51,9 +51,8 @@
   loop:
     - https://www.arin.net/resources/manage/rpki/arin-ripevalidator.tal
     - https://rpki-testbed.apnic.net/repository/apnic-rpki-root-iana-origin.tal
-    - https://raw.githubusercontent.com/pavel-odintsov/RPKI-toolkit/master/rp/rcynic/sample-trust-anchors/ripe-pilot.tal
 
-- name: Add AS0 tal tals
+- name: Add tals from files
   copy:
     src: "{{item}}"
     dest: "/var/lib/rpki-validator/preconfigured-tals/{{item}}"
@@ -63,3 +62,4 @@
   notify: restart rpki-validator-3
   loop:
     - apnic-as0.tal
+    - RIPE-NCC-Pilot.tal
