@@ -1,16 +1,30 @@
 ---
-- name: "Install rtr-server {{rpki.rtr_server_package_url}}"
-  apt:
-    deb: "{{rpki.rtr_server_package_url}}"
+- name: Add yum repo
+  yum_repository:
+    name: ripencc-rpki-rc
+    description: RIPE NCC RPKI Validator 3 RELEASE CANDIDATE releases
+    baseurl: "{{rpki.centos_repo_url}}"
+    
+- name: Update repositories cache
+  yum:
+    state: present
+    update_cache: yes
 
-- name: "Install validator {{rpki.validator_3_package_url}}"
-  apt:
-    deb: "{{rpki.validator_3_package_url}}"
+- name: Upgrade all packages to the latest version
+  yum:
+    name: "*"
+    state: latest
+
+- name: Install packages
+  yum:
+    name:
+      - rpki-validator
+      - rpki-rtr-server
 
 - name: Make sure rpki-validator listens on all ips
   lineinfile:
     path: /etc/rpki-validator-3/application.properties
-    regexp: '^listen='
+    regexp: '^server.address='
     line: server.address=0.0.0.0
     
 - name: Make sure rtr-server listens on all ips
@@ -43,7 +57,7 @@
 - name: Download tals
   get_url:
     url: "{{item}}"
-    dest: "/var/lib/rpki-validator/preconfigured-tals/{{item | basename}}"
+    dest: "/var/lib/rpki-validator-3/preconfigured-tals/{{item | basename}}"
     owner: rpki
     group: rpki
     mode: 0644
@@ -55,7 +69,7 @@
 - name: Add tals from files
   copy:
     src: "{{item}}"
-    dest: "/var/lib/rpki-validator/preconfigured-tals/{{item}}"
+    dest: "/var/lib/rpki-validator-3/preconfigured-tals/{{item}}"
     owner: rpki
     group: rpki
     mode: 0644
