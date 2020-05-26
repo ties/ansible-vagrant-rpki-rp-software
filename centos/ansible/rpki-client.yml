@@ -1,0 +1,7 @@
+---
+- name: rpki-client
+  hosts: ['rpki-client']
+  become: True
+
+  roles:
+    - role: rpki-client

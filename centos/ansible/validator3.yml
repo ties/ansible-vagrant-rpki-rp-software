@@ -5,7 +5,7 @@
 
   vars:
     rpki:
-      centos_repo_url: https://ftp.ripe.net/tools/rpki/validator3/prod/centos7/repo/
+      centos_repo_url: https://ftp.ripe.net/tools/rpki/validator3/rc/centos7/repo/
 
   roles:
     - role: validator3

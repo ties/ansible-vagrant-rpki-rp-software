@@ -1,2 +1,3 @@
 ---
 - import_playbook: validator3.yml
+- import_playbook: rpki-client.yml
