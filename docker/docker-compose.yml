@@ -1,0 +1,25 @@
+version: '2'
+
+services:
+  routinator:
+    image: nlnetlabs/routinator:v0.7.0
+    restart: always
+    ports:
+      - 9556:9556
+      - 3323:3323
+    volumes:
+      - ./routinator/tals:/home/routinator/.rpki-cache/tals
+  rpki_client:
+    image: tiesdekock/rpki-client-web:latest
+    restart: always
+    ports:
+      - 8888:8888
+    volumes:
+      - ./rpki_client/:/config
+  rpki_validator_3:
+    image: ripencc/rpki-validator-3:latest
+    restart: always
+    ports:
+      - 8080:8080
+    volumes:
+      - ./rpki_validator_3/:/config
