@@ -1,0 +1,9 @@
+---
+- name: Open ports in firewall
+  firewalld:
+    port: "{{item}}"
+    permanent: yes
+    state: enabled
+  loop:
+    - "8081/tcp"
+    - "8080/tcp"

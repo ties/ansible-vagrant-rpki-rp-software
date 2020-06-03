@@ -1,4 +1,7 @@
 ---
+- import_tasks: setup_centos.yml
+  when: ansible_distribution == 'CentOS'
+    
 - name: Add yum repo
   yum_repository:
     name: ripencc-rpki-rc
@@ -77,12 +80,3 @@
   loop:
     - apnic-as0.tal
     - RIPE-NCC-Pilot.tal
-
-- name: Open ports in firewall
-  firewalld:
-    port: "{{item}}"
-    permanent: yes
-    state: enabled
-  loop:
-    - "8081/tcp"
-    - "8080/tcp"
