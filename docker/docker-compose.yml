@@ -9,6 +9,22 @@ services:
       - 3323:3323
     volumes:
       - ./routinator/tals:/home/routinator/.rpki-cache/tals
+  routinator_norrdp:
+    image: nlnetlabs/routinator:v0.7.0
+    restart: always
+    ports:
+      - 9558:9556
+    volumes:
+      - ./routinator/tals:/home/routinator/.rpki-cache/tals
+    command: --disable-rrdp server --http 0.0.0.0:9556
+  routinator_norsync:
+    image: nlnetlabs/routinator:v0.7.0
+    restart: always
+    ports:
+      - 9557:9556
+    volumes:
+      - ./routinator_norsync/tals:/home/routinator/.rpki-cache/tals
+    command: --disable-rsync server --http 0.0.0.0:9556
   rpki_client:
     image: tiesdekock/rpki-client-web:latest
     restart: always
