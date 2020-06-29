@@ -2,7 +2,7 @@ version: '2'
 
 services:
   routinator:
-    image: nlnetlabs/routinator:v0.7.0
+    image: nlnetlabs/routinator:v0.7.1
     restart: always
     ports:
       - 9556:9556
@@ -10,7 +10,7 @@ services:
     volumes:
       - ./routinator/tals:/home/routinator/.rpki-cache/tals
   routinator_norrdp:
-    image: nlnetlabs/routinator:v0.7.0
+    image: nlnetlabs/routinator:v0.7.1
     restart: always
     ports:
       - 9558:9556
@@ -18,7 +18,7 @@ services:
       - ./routinator/tals:/home/routinator/.rpki-cache/tals
     command: --disable-rrdp server --http 0.0.0.0:9556
   routinator_norsync:
-    image: nlnetlabs/routinator:v0.7.0
+    image: nlnetlabs/routinator:v0.7.1
     restart: always
     ports:
       - 9557:9556
