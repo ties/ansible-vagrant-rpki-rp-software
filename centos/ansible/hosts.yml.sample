@@ -1,0 +1,40 @@
+#
+# Deploy multiple versions at once for regression testing
+#
+all:
+  hosts:
+    validator_prod:
+      ansible_host: <fill in>
+      ansible_connection: ssh
+      ansible_user: root
+
+    validator_dev:
+      ansible_host: <fill in>
+      ansible_connection: ssh
+      ansible_user: root
+
+validator3:
+  hosts:
+    validator_dev:
+    validator_prod:
+
+prometheus:
+  hosts:
+    validator_dev:
+    validator_prod:
+
+# Prefer the beta group when it is present
+validator_beta:
+  vars:
+    ansible_group_priority: 10
+    rpki:
+      centos_repo_url: https://ftp.ripe.net/tools/rpki/validator3/beta/centos7/repo/
+  hosts:
+    validator_dev:
+
+regression_test:
+  vars:
+    all_tals: False
+  hosts:
+    validator_dev:
+    validator_prod:

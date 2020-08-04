@@ -1,4 +1,10 @@
 ---
+- name: Install firewalld python bindings
+  yum:
+    name:
+      - firewalld
+      - python3-firewall
+
 - name: Open ports in firewall
   firewalld:
     port: "{{item}}"

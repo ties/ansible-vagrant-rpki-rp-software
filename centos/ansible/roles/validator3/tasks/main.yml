@@ -69,6 +69,7 @@
   loop:
     - https://www.arin.net/resources/manage/rpki/arin-ripevalidator.tal
     - https://rpki-testbed.apnic.net/repository/apnic-rpki-root-iana-origin.tal
+  when: "{{all_tals | default(True) }}"
 
 - name: Add tals from files
   copy:
@@ -81,3 +82,4 @@
   loop:
     - apnic-as0.tal
     - RIPE-NCC-Pilot.tal
+  when: "{{all_tals | default(True) }}"

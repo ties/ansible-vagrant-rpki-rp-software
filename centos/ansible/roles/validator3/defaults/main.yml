@@ -1,2 +1,4 @@
 ---
-# defaults file for validator3
+all_tals: True
+rpki:
+  centos_repo_url: https://ftp.ripe.net/tools/rpki/validator3/prod/centos7/repo/

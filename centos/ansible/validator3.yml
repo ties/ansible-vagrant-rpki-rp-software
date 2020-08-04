@@ -3,9 +3,5 @@
   hosts: ['validator3']
   become: True
 
-  vars:
-    rpki:
-      centos_repo_url: https://ftp.ripe.net/tools/rpki/validator3/prod/centos7/repo/
-
   roles:
     - role: validator3

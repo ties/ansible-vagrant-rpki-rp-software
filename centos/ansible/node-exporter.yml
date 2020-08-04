@@ -1,0 +1,14 @@
+---
+- name: node-exporter
+  hosts: ['prometheus']
+  become: True
+
+  tasks:
+    - name: Open ports in firewall
+      firewalld:
+        port: "{{node_exporter_web_listen_address.split(':')[1]}}/tcp"
+        permanent: yes
+        state: enabled
+
+  roles:
+    - role: cloudalchemy.node-exporter
