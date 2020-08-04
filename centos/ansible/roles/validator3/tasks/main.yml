@@ -20,23 +20,24 @@
 
 - name: Install packages
   yum:
+    disable_gpg_check: True
     name:
       - rpki-validator
       - rpki-rtr-server
 
-- name: Make sure rpki-validator listens on all ips
-  lineinfile:
-    path: /etc/rpki-validator-3/application.properties
-    regexp: '^server.address='
-    line: server.address=0.0.0.0
-    
 - name: Make sure rtr-server listens on all ips
   lineinfile:
     path: /etc/rpki-rtr-server/application.properties
     regexp: '^server.address='
     line: server.address=0.0.0.0
   notify: restart rpki-rtr-server
-    
+
+- name: Make sure rtr-server listens on all ips
+  lineinfile:
+    path: /etc/rpki-rtr-server/application.properties
+    regexp: '^rtr.server.address='
+    line: rtr.server.address=0.0.0.0
+  notify: restart rpki-rtr-server
     
 - name: Make sure rpki-validator listens on all ips
   lineinfile:
