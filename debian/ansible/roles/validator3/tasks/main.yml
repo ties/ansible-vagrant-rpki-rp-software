@@ -40,26 +40,26 @@
     enabled: yes
     state:  started
 
-- name: Download tals
-  get_url:
-    url: "{{item}}"
-    dest: "/var/lib/rpki-validator/preconfigured-tals/{{item | basename}}"
-    owner: rpki
-    group: rpki
-    mode: 0644
-  notify: restart rpki-validator-3
-  loop:
-    - https://www.arin.net/resources/manage/rpki/arin-ripevalidator.tal
-    - https://rpki-testbed.apnic.net/repository/apnic-rpki-root-iana-origin.tal
+# - name: Download tals
+#   get_url:
+#     url: "{{item}}"
+#     dest: "/var/lib/rpki-validator/preconfigured-tals/{{item | basename}}"
+#     owner: rpki
+#     group: rpki
+#     mode: 0644
+#   notify: restart rpki-validator-3
+#   loop:
+#     - https://www.arin.net/resources/manage/rpki/arin-ripevalidator.tal
+#     - https://rpki-testbed.apnic.net/repository/apnic-rpki-root-iana-origin.tal
 
-- name: Add tals from files
-  copy:
-    src: "{{item}}"
-    dest: "/var/lib/rpki-validator/preconfigured-tals/{{item}}"
-    owner: rpki
-    group: rpki
-    mode: 0644
-  notify: restart rpki-validator-3
-  loop:
-    - apnic-as0.tal
-    - RIPE-NCC-Pilot.tal
+# - name: Add tals from files
+#   copy:
+#     src: "{{item}}"
+#     dest: "/var/lib/rpki-validator/preconfigured-tals/{{item}}"
+#     owner: rpki
+#     group: rpki
+#     mode: 0644
+#   notify: restart rpki-validator-3
+#   loop:
+#     - apnic-as0.tal
+#     - RIPE-NCC-Pilot.tal
