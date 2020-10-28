@@ -1,4 +1,14 @@
 ---
-all_tals: True
-rpki:
-  centos_repo_url: https://ftp.ripe.net/tools/rpki/validator3/rc/centos7/repo/
+all_tals: false
+
+centos_repo_url: https://ftp.ripe.net/tools/rpki/validator3/rc/centos7/repo/
+
+rtr_server_deb_package_url: https://ftp.ripe.net/tools/rpki/validator3/rc/deb/rpki-rtr-server-latest.deb
+validator_3_deb_package_url: https://ftp.ripe.net/tools/rpki/validator3/rc/deb/rpki-validator-3-latest.deb
+
+
+default_tals:
+  - https://www.arin.net/resources/manage/rpki/arin-ripevalidator.tal
+
+additional_tals:
+  - https://rpki-testbed.apnic.net/repository/apnic-rpki-root-iana-origin.tal

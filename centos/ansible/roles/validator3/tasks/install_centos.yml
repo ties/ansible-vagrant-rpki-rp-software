@@ -3,7 +3,7 @@
   yum_repository:
     name: ripencc-rpki-rc
     description: RIPE NCC RPKI Validator 3 RELEASE CANDIDATE releases
-    baseurl: "{{rpki.centos_repo_url}}"
+    baseurl: "{{centos_repo_url}}"
     
 - name: Update repositories cache
   yum:
@@ -54,39 +54,3 @@
     name: rpki-rtr-server
     enabled: yes
     state:  started
-
-- name: Download ARIN tal
-  get_url:
-    url: "{{item}}"
-    dest: "/var/lib/rpki-validator-3/preconfigured-tals/{{item | basename}}"
-    owner: rpki
-    group: rpki
-    mode: 0644
-  notify: restart rpki-validator-3
-  loop:
-    - https://www.arin.net/resources/manage/rpki/arin-ripevalidator.tal
-
-- name: Download tals
-  get_url:
-    url: "{{item}}"
-    dest: "/var/lib/rpki-validator-3/preconfigured-tals/{{item | basename}}"
-    owner: rpki
-    group: rpki
-    mode: 0644
-  notify: restart rpki-validator-3
-  loop:
-    - https://rpki-testbed.apnic.net/repository/apnic-rpki-root-iana-origin.tal
-  when: "{{rpki.all_tals | default(True) }}"
-
-- name: Add tals from files
-  copy:
-    src: "{{item}}"
-    dest: "/var/lib/rpki-validator-3/preconfigured-tals/{{item}}"
-    owner: rpki
-    group: rpki
-    mode: 0644
-  notify: restart rpki-validator-3
-  loop:
-    - apnic-as0.tal
-    - RIPE-NCC-Pilot.tal
-  when: "{{rpki.all_tals | default(True) }}"

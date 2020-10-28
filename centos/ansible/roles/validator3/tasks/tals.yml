@@ -1,0 +1,34 @@
+---
+- name: Download tals
+  get_url:
+    url: "{{item}}"
+    dest: "{{validator_data_directory}}/preconfigured-tals/{{item | basename}}"
+    owner: rpki
+    group: rpki
+    mode: 0644
+  notify: restart rpki-validator-3
+  loop: "{{default_tals}}"
+
+- name: Download non-default tals
+  get_url:
+    url: "{{item}}"
+    dest: "{{validator_data_directory}}/preconfigured-tals/{{item | basename}}"
+    owner: rpki
+    group: rpki
+    mode: 0644
+  notify: restart rpki-validator-3
+  loop: "{{additional_tals}}"
+  when: "{{all_tals | default(False) }}"
+
+- name: Add non-default tals from files
+  copy:
+    src: "{{item}}"
+    dest: "{{validator_data_directory}}/preconfigured-tals/{{item}}"
+    owner: rpki
+    group: rpki
+    mode: 0644
+  notify: restart rpki-validator-3
+  loop:
+    - apnic-as0.tal
+    - RIPE-NCC-Pilot.tal
+  when: "{{all_tals | default(False) }}"
