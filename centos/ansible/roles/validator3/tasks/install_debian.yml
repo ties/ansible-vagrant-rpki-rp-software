@@ -1,0 +1,68 @@
+---
+- apt:
+    update_cache: yes
+
+- name: "Install rtr-server {{rpki.rtr_server_deb_package_url}}"
+  apt:
+    deb: "{{rpki.rtr_server_deb_package_url}}"
+
+- name: "Install validator {{rpki.validator_3_deb_package_url}}"
+  apt:
+    deb: "{{rpki.validator_3_deb_package_url}}"
+
+- name: Make sure rpki-validator listens on all ips
+  lineinfile:
+    path: /etc/rpki-validator-3/application.properties
+    regexp: '^listen='
+    line: server.address=0.0.0.0
+
+- name: Make sure rtr-server listens on all ips
+  lineinfile:
+    path: /etc/rpki-rtr-server/application.properties
+    regexp: '^server.address='
+    line: server.address=0.0.0.0
+  notify: restart rpki-rtr-server
+
+
+- name: Make sure rpki-validator listens on all ips
+  lineinfile:
+    path: /etc/rpki-validator-3/application.properties
+    regexp: '^server.address='
+    line: server.address=0.0.0.0
+  notify: restart rpki-validator-3
+
+- name: Enable rpki-validator-3 service
+  systemd:
+    name: rpki-validator-3
+    enabled: yes
+    state: started
+
+- name: Enable rtr-server service
+  systemd:
+    name: rpki-rtr-server
+    enabled: yes
+    state:  started
+
+# - name: Download tals
+#   get_url:
+#     url: "{{item}}"
+#     dest: "/var/lib/rpki-validator/preconfigured-tals/{{item | basename}}"
+#     owner: rpki
+#     group: rpki
+#     mode: 0644
+#   notify: restart rpki-validator-3
+#   loop:
+#     - https://www.arin.net/resources/manage/rpki/arin-ripevalidator.tal
+#     - https://rpki-testbed.apnic.net/repository/apnic-rpki-root-iana-origin.tal
+
+# - name: Add tals from files
+#   copy:
+#     src: "{{item}}"
+#     dest: "/var/lib/rpki-validator/preconfigured-tals/{{item}}"
+#     owner: rpki
+#     group: rpki
+#     mode: 0644
+#   notify: restart rpki-validator-3
+#   loop:
+#     - apnic-as0.tal
+#     - RIPE-NCC-Pilot.tal

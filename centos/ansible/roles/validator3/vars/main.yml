@@ -1,2 +1,9 @@
 ---
 # vars file for validator3
+rpki:
+  all_tals: false
+
+  centos_repo_url: https://ftp.ripe.net/tools/rpki/validator3/rc/centos7/repo/
+
+  rtr_server_deb_package_url: https://ftp.ripe.net/tools/rpki/validator3/rc/deb/rpki-rtr-server-latest.deb
+  validator_3_deb_package_url: https://ftp.ripe.net/tools/rpki/validator3/rc/deb/rpki-validator-3-latest.deb
