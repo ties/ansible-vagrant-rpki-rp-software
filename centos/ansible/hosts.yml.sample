@@ -28,7 +28,7 @@ validator_beta:
   vars:
     ansible_group_priority: 10
     rpki:
-      centos_repo_url: https://ftp.ripe.net/tools/rpki/validator3/rc/centos7/repo/
+      centos_repo_url: https://ftp.ripe.net/tools/rpki/validator3/prod/centos7/repo/
   hosts:
     validator_dev:
 
